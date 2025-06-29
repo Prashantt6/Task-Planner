@@ -9,16 +9,35 @@ class homescreen extends StatefulWidget {
 }
 
 class CurrentDateWidget extends StatelessWidget {
+  String _getDayWithSuffix(int day){
+    if (day>= 11 && day <= 13){
+      return '${day}th';
+
+    }
+    switch (day % 10 ){
+      case 1 :
+        return '${day}st';
+      case 2 :
+        return '${day}nd';
+      case 3 :
+        return '${day}rd';
+      default:
+        return '${day}th';
+    }
+  }
   @override
-  Widget build(BuildContext context) {
-    String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  Widget build(BuildContext context){
+    final now = DateTime.now();
+    final dayWithSuffix = _getDayWithSuffix(now.day);
+    final month = DateFormat('MMMM').format(now);
+
     return Text(
-      ' $currentDate',
+      ' $dayWithSuffix $month',
       style: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: Colors.black,
-        fontFamily: 'Bebas',
+        fontFamily: 'fonthead',
       ),
     );
   }
@@ -48,7 +67,7 @@ class _homescreenState extends State<homescreen> {
                   child: CircleAvatar(
                     radius: 40,
                     backgroundImage: AssetImage('assets/logo/avatar1.png' ),
-                    backgroundColor: Colors.grey,
+                    backgroundColor: Colors.white,
                   ),
                 ),
 
