@@ -41,17 +41,17 @@ class _homescreenState extends State<homescreen> {
             ),
             child: Stack(
               children: [
-                /// ✅ New Text or Image at Top-Left
+
                 Positioned(
                   top: 60,
                   left: 20,
                   child: CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/logo/avatar.png' ),
+                    backgroundImage: AssetImage('assets/logo/avatar1.png' ),
+                    backgroundColor: Colors.grey,
                   ),
                 ),
 
-                /// ✅ Existing bottom content (Hi User + Date)
                 Positioned(
                   bottom: 20,
                   left: 20,
@@ -59,7 +59,7 @@ class _homescreenState extends State<homescreen> {
                   child: Row(
                     children: [
                       Text(
-                        "Hi User",
+                        "Hi Prashant",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
@@ -75,8 +75,10 @@ class _homescreenState extends State<homescreen> {
               ],
             ),
           ),
+
         ],
       ),
+
     );
   }
 }
