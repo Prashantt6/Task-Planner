@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 16),
             const Text(
-              "Daily Planner",
+              "PlanIt",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,

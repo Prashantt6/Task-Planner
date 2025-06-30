@@ -86,6 +86,9 @@ flutter:
         - asset: assets/fonts/BebasNeue-Regular.ttf
 #         - asset: fonts/TrajanPro_Bold.ttf
 #           weight: 700
+    - family: hicomic
+      fonts:
+          - asset: assets/fonts/CandyBeans.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
