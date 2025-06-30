@@ -54,8 +54,9 @@ class _homescreenState extends State<homescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent  ,
-      body: SingleChildScrollView(
+      backgroundColor:Color(0xFFADD8E6),
+
+        body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(0),
           child: Column(
@@ -80,6 +81,7 @@ class _homescreenState extends State<homescreen> {
                         backgroundColor: Colors.white,
                       ),
                     ),
+                    
                     Positioned(
                       bottom: 20,
                       left: 20,
@@ -122,20 +124,53 @@ class _homescreenState extends State<homescreen> {
                           borderRadius: BorderRadius.circular(20),
                           color: Color(0xFFE6E6FA)
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 40,top: 10),
-                          child: RichText(text: TextSpan(
-                            text: "Todays Task",
-                            style: TextStyle(
-                              fontFamily: 'fonthead',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                              color: Colors.black
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      color: Colors.grey
+                                    ),
+                                    child: CircleAvatar(
+                                      radius:10,
+                                      backgroundColor: Colors.red,
+                                      backgroundImage: AssetImage('assets/logo/reminder2.jpg'),
+                                    ),
+                                  ),
+                                ),
+                                Text("Today's Task",style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "fonthead"
+                                ),)
+
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 300,
+                                height: 285,
+                                decoration: BoxDecoration(
+                                    color: Colors.blueGrey
+                                ),
+
+                              ),
                             )
-                          )),
+                          ],
                         ),
                       ),
                     ),
+
+
+
                     Padding(
                       padding: const EdgeInsets.only(left:10),
                       child: Container(
@@ -145,17 +180,50 @@ class _homescreenState extends State<homescreen> {
                               borderRadius: BorderRadius.circular(20),
                               color: Color(0xFFE6E6FA)
                           ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10,top: 5),
-                          child: RichText(text: TextSpan(
-                              text: "Previous Incompleted Task",
-                              style: TextStyle(
-                                  fontFamily: 'fonthead',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                  color: Colors.black
-                              )
-                          )),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(100),
+                                        color: Colors.grey
+                                    ),
+                                    child: CircleAvatar(
+                                      radius:10,
+                                      backgroundColor: Colors.black,
+                                      backgroundImage: AssetImage('assets/logo/images2.png'),
+                                    ),
+                                  ),
+                                ),
+
+                                Flexible(
+                                  child: Text("Previous Incomplete Task",style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "fonthead"
+                                  ),
+                                  softWrap: true,
+                                  ),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 300,
+                                height: 285,
+                                decoration: BoxDecoration(
+                                  // color: Colors.red
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     )
@@ -180,16 +248,47 @@ class _homescreenState extends State<homescreen> {
                            color: Color(0xFFE6E6FA)
                        ),
                        child: Padding(
-                         padding: const EdgeInsets.only(left: 20,top: 10),
-                         child: RichText(text: TextSpan(
-                             text: "Prescheduled Task",
-                             style: TextStyle(
-                                 fontFamily: 'fonthead',
-                                 fontWeight: FontWeight.w600,
-                                 fontSize: 20,
-                                 color: Colors.black
+                         padding: const EdgeInsets.only(top: 10),
+                         child: Column(
+                           mainAxisAlignment: MainAxisAlignment.start,
+                           children: [
+                             Row(
+                               children: [
+                                 Container(
+                                   width: 50,
+                                   height: 50,
+                                   decoration: BoxDecoration(
+                                     color: Colors.grey,
+                                     borderRadius: BorderRadius.circular(50)
+                                   ),
+                                   child: CircleAvatar(
+                                     backgroundImage: AssetImage('assets/logo/clock.jpg'),
+                                   ),
+                                 ),
+                                 Flexible(
+                                   child: Text('Pre Schedulded Tasks',style: TextStyle(
+                                     fontSize: 15,
+                                     fontWeight: FontWeight.bold,
+                                     fontFamily: 'fonthead'
+                                   ),
+                                     softWrap: true,
+                                   ),
+                                 ),
+
+                               ],
+                             ),
+                             Padding(
+                               padding: const EdgeInsets.all(8.0),
+                               child: Container(
+                                 width: 300,
+                                 height:222 ,
+                                 decoration: BoxDecoration(
+                                   // color: Colors.red
+                                 ),
+                               ),
                              )
-                         )),
+                           ],
+                         ),
                        ),
                      ),
                    ),
@@ -204,20 +303,21 @@ class _homescreenState extends State<homescreen> {
                          height: 300,
                          decoration: BoxDecoration(
                              borderRadius: BorderRadius.circular(20),
-                             color: Colors.lightBlueAccent
+                             color: Color(0xFFADD8E6)
+
                          ),
                            child: Stack(
                              children: [
                                Positioned(
-                                    top : 150,
+                                    top : 240,
                                    left: 80,
                                    child: Text("New Task",style: TextStyle(
                                      fontSize: 25,
-                                     fontWeight: FontWeight.w800,
+                                     fontWeight: FontWeight.bold,
                                      fontFamily: 'fonthead'
                                    ),)),
                                Positioned(
-                                   bottom: 20,
+                                   bottom: 60,
                                    left: 90,
 
 
