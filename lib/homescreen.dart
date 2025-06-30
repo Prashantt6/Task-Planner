@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:to_do_list/Prescheduledtaskscreen.dart';
+import 'package:to_do_list/Previoustaskscreen.dart';
+import 'package:to_do_list/Todaytaskscreen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -159,7 +162,27 @@ class _homescreenState extends State<homescreen> {
                                 width: 300,
                                 height: 285,
                                 decoration: BoxDecoration(
-                                    color: Colors.blueGrey
+                                    color: Color(0xFFE6E6FA),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 8.0,left: 120),
+                                          child: ElevatedButton.icon(onPressed: (){
+                                            Navigator.push(context,
+                                            MaterialPageRoute(builder: (context) => todaytaskscreen()));
+                                          }, icon: Icon(Icons.arrow_forward),style:ElevatedButton.styleFrom(
+                                            backgroundColor:Color(0xFFE6E6FA),
+                                            foregroundColor: Colors.black,
+                                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                                          ),label: Text('More'),),
+                                        )
+                                      ],
+                                    )
+                                  ],
                                 ),
 
                               ),
@@ -221,6 +244,27 @@ class _homescreenState extends State<homescreen> {
                                 decoration: BoxDecoration(
                                   // color: Colors.red
                                 ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 8.0,left: 100),
+                                          child: ElevatedButton.icon(onPressed: (){
+                                            Navigator.push(context,
+                                                MaterialPageRoute(builder: (context) => previoustaskscreen()));
+                                          }, icon: Icon(Icons.arrow_forward),style:ElevatedButton.styleFrom(
+                                            backgroundColor:Color(0xFFE6E6FA),
+                                            foregroundColor: Colors.black,
+                                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                                          ),label: Text('More'),),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+
                               ),
                             )
                           ],
@@ -284,6 +328,26 @@ class _homescreenState extends State<homescreen> {
                                  height:222 ,
                                  decoration: BoxDecoration(
                                    // color: Colors.red
+                                 ),
+                                 child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.end,
+                                   children: [
+                                     Row(
+                                       children: [
+                                         Padding(
+                                           padding: const EdgeInsets.only(top: 8.0,left: 120),
+                                           child: ElevatedButton.icon(onPressed: (){
+                                             Navigator.push(context,
+                                                 MaterialPageRoute(builder: (context) => presceduldedtaskscreen()));
+                                           }, icon: Icon(Icons.arrow_forward),style:ElevatedButton.styleFrom(
+                                             backgroundColor:Color(0xFFE6E6FA),
+                                             foregroundColor: Colors.black,
+                                             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                                           ),label: Text('More'),),
+                                         )
+                                       ],
+                                     )
+                                   ],
                                  ),
                                ),
                              )
