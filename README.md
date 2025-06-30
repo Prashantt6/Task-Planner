@@ -1,10 +1,9 @@
 <<<<<<< HEAD
 # Task_Planner
-This is the day to day to task planner applications made using flutter
-=======
-# to_do_list
+ Day to Day to task planner applications made using flutter
 
-A new Flutter project.
+# to_do_list
+For better experience consider it using in Google Pixel 9 pro XL .
 
 ## Getting Started
 
