@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/data/local/DBhelper.dart';
-import 'package:to_do_list/homescreen.dart';
 
 class todaytaskscreen extends StatefulWidget {
   const todaytaskscreen({super.key});
@@ -10,101 +9,76 @@ class todaytaskscreen extends StatefulWidget {
 }
 
 class _todaytaskscreenState extends State<todaytaskscreen> {
-  // Including Database
   DbHelper? dbRef;
-  List<Map<String,dynamic>> alltasks = [];
+  List<Map<String, dynamic>> alltasks = [];
 
   @override
-  void initState (){
-    super.initState;
+  void initState() {
+    super.initState();
     dbRef = DbHelper.getInstance;
     getTasks();
   }
-  void getTasks()async{
+
+  void getTasks() async {
     alltasks = await dbRef!.getAllTasks();
+    setState(() {});
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
               height: 50,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(10)
-              ),
+              color: Colors.grey,
             ),
-
-            Container(
-              width: double.infinity,
-              height: 1000,
-              decoration: BoxDecoration(
-                color: Color(0xFFE6E6FA),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width : double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color:  Color(0xFFE6E6FA),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            // Back Button on the left
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0, left: 5.0),
-                              child: ElevatedButton.icon(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) =>homescreen()));
-                                },
-                                icon: Icon(Icons.arrow_back),
-                                label: Text(""),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:Color(0xFFE6E6FA),
-                                  foregroundColor: Colors.black,
-                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                                ),
-                              ),
-                            ),
-
-                            // Push the avatar to the right
-                            Spacer(),
-
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0, right: 16.0),
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage('assets/logo/avatar1.png'),
-                                backgroundColor: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        )
-
-                      ],
-                    ),
-
-                  )
-                ],
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back),
+                    label: Text(""),
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  "Today's Tasks",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'fonthead',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Spacer(),
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/logo/avatar1.png'),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Expanded(
+              child: alltasks.isNotEmpty
+                  ? ListView.builder(
+                itemCount: alltasks.length,
+                itemBuilder: (_, index) {
+                  return ListTile(
+                    title: Text(alltasks[index][DbHelper.getInstance.COLUMN_TITLE]),
+                    subtitle: Text(alltasks[index][DbHelper.getInstance.COLUMN_DESCRIPTION] ?? ''),
+                  );
+                },
               )
-            )
+                  : Center(child: Text("No tasks added")),
+            ),
           ],
         ),
       ),
     );
   }
-
 }

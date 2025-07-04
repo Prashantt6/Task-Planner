@@ -34,6 +34,7 @@ class _addnewtaskscreenState extends State<addnewtaskscreen> {
     taskdate = 'Today';
     _priorityController.text = 'Normal';
     _pretaskController.text = 'Today';
+   dbRef =  DbHelper.getInstance;
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -199,6 +200,7 @@ class _addnewtaskscreenState extends State<addnewtaskscreen> {
                       SizedBox(height: 16),
                       SizedBox(
                         height: 60,
+
                         child: TextField(
                           controller: _dateController,
                           readOnly: true,
@@ -206,7 +208,9 @@ class _addnewtaskscreenState extends State<addnewtaskscreen> {
                             icon: Icon(Icons.calendar_today),
                             labelText: "Select Date",
                             border: OutlineInputBorder(),
+
                           ),
+
                           onTap: () => _selectDate(context),
                         ),
                       ),
@@ -252,16 +256,53 @@ class _addnewtaskscreenState extends State<addnewtaskscreen> {
                         ],
                       ),
                       SizedBox(height: 24),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // handle add task
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),
-                            child: Text("Add", style: TextStyle(fontSize: 18)),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(11),
+                                  side: BorderSide(
+                                      width: 0.5,
+                                      color: Colors.grey
+                                  )
+                              )),
+
+                              onPressed: () {
+                                dbRef!.addTask(
+                                    tTitle: _titleController.text,
+                                    tDate: _dateController.text,
+                                    tdesc: _descController.text,
+                                    priority: _priorityController.text);
+                                Navigator.pop(context);
+                                // Navigator.pop(context);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),
+                                child: Text("Add", style: TextStyle(fontSize: 18)),
+
+                              ),
+                            ),
                           ),
-                        ),
+                          Expanded(
+                            child: ElevatedButton(
+                              style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(11),
+                                side: BorderSide(
+                                  width: 0.5,
+                                  color: Colors.grey
+                                )
+                              )),
+                              onPressed: () {
+                                      Navigator.pop(context);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),
+                                child: Text("Cancel", style: TextStyle(fontSize: 18)),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 24),
                     ],
