@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:to_do_list/NewTaskscreen.dart';
 import 'package:to_do_list/Prescheduledtaskscreen.dart';
 import 'package:to_do_list/Previoustaskscreen.dart';
 import 'package:to_do_list/Todaytaskscreen.dart';
@@ -59,16 +60,21 @@ class _homescreenState extends State<homescreen> {
     return Scaffold(
       backgroundColor:Color(0xFFADD8E6),
 
-        body: SingleChildScrollView(
+        body:LayoutBuilder(builder: (context, constraints){
+          double headerheight = constraints.maxHeight *0.25;
+        
+        return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(0),
           child: Column(
+
             children: [
 
               // GREY HEADER CONTAINER
               Container(
                 width: double.infinity,
-                height: 300,
+
+                height: headerheight,
                 decoration: BoxDecoration(
                   color: Color(0xFFE6E6FA),
                   borderRadius: BorderRadius.circular(40),
@@ -257,7 +263,7 @@ class _homescreenState extends State<homescreen> {
                                           }, icon: Icon(Icons.arrow_forward),style:ElevatedButton.styleFrom(
                                             backgroundColor:Color(0xFFE6E6FA),
                                             foregroundColor: Colors.black,
-                                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                           ),label: Text('More'),),
                                         )
                                       ],
@@ -285,7 +291,7 @@ class _homescreenState extends State<homescreen> {
                    Padding(
                      padding: const EdgeInsets.only(left: 10),
                      child: Container(
-                       height: 300,
+                       height: 350,
                        width: 220,
                        decoration:BoxDecoration(
                            borderRadius: BorderRadius.circular(20),
@@ -322,10 +328,10 @@ class _homescreenState extends State<homescreen> {
                                ],
                              ),
                              Padding(
-                               padding: const EdgeInsets.all(8.0),
+                               padding: const EdgeInsets.only(top: 60.0),
                                child: Container(
                                  width: 300,
-                                 height:222 ,
+                                 height:220 ,
                                  decoration: BoxDecoration(
                                    // color: Colors.red
                                  ),
@@ -335,14 +341,14 @@ class _homescreenState extends State<homescreen> {
                                      Row(
                                        children: [
                                          Padding(
-                                           padding: const EdgeInsets.only(top: 8.0,left: 120),
+                                           padding: const EdgeInsets.only(top: 8.0,left: 125  ),
                                            child: ElevatedButton.icon(onPressed: (){
                                              Navigator.push(context,
                                                  MaterialPageRoute(builder: (context) => presceduldedtaskscreen()));
                                            }, icon: Icon(Icons.arrow_forward),style:ElevatedButton.styleFrom(
                                              backgroundColor:Color(0xFFE6E6FA),
                                              foregroundColor: Colors.black,
-                                             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                                             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                                            ),label: Text('More'),),
                                          )
                                        ],
@@ -392,7 +398,12 @@ class _homescreenState extends State<homescreen> {
                                        borderRadius: BorderRadius.circular(200),
                                        color: Color(0xFFE6E6FA)
                                      ),
-                                     child: IconButton(onPressed: (){}, icon: TextButton.icon(onPressed: (){}, label: Text("+",style: TextStyle(
+                                     child: IconButton(onPressed: (){
+
+                                     }, icon: TextButton.icon(onPressed: (){
+                                       Navigator.push(context,
+                                           MaterialPageRoute(builder: (context) => addnewtaskscreen()));
+                                     }, label: Text("+",style: TextStyle(
                                        fontSize: 50,
                                        fontWeight: FontWeight.w600,
                                        color: Colors.black
@@ -418,7 +429,9 @@ class _homescreenState extends State<homescreen> {
             ],
           ),
         ),
-      ),
+        );
+        },
+        ),
     );
   }
 }

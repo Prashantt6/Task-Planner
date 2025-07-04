@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_list/data/local/DBhelper.dart';
 import 'package:to_do_list/homescreen.dart';
 
 class todaytaskscreen extends StatefulWidget {
@@ -9,6 +10,22 @@ class todaytaskscreen extends StatefulWidget {
 }
 
 class _todaytaskscreenState extends State<todaytaskscreen> {
+  // Including Database
+  DbHelper? dbRef;
+  List<Map<String,dynamic>> alltasks = [];
+
+  @override
+  void initState (){
+    super.initState;
+    dbRef = DbHelper.getInstance;
+    getTasks();
+  }
+  void getTasks()async{
+    alltasks = await dbRef!.getAllTasks();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
