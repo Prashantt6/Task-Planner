@@ -4,6 +4,7 @@ import 'package:to_do_list/NewTaskscreen.dart';
 import 'package:to_do_list/Prescheduledtaskscreen.dart';
 import 'package:to_do_list/Previoustaskscreen.dart';
 import 'package:to_do_list/Todaytaskscreen.dart';
+import 'package:to_do_list/data/local/DBhelper.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,6 +15,7 @@ void main() {
 
 class homescreen extends StatefulWidget {
   const homescreen({super.key});
+
 
   @override
   State<homescreen> createState() => _homescreenState();
@@ -56,6 +58,21 @@ class CurrentDateWidget extends StatelessWidget {
 
 class _homescreenState extends State<homescreen> {
   @override
+  List<Map<String,dynamic>> alltasks = [];
+  DbHelper? dbRef;
+  void initState(){
+    super.initState();
+    dbRef = DbHelper.getInstance;
+    getTasks();
+
+  }
+  void getTasks()async{
+      alltasks = await dbRef!.getAllTasks();
+      setState(() {
+
+      });
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:Color(0xFFADD8E6),
@@ -69,25 +86,31 @@ class _homescreenState extends State<homescreen> {
           child: Column(
 
             children: [
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.black26
+                ),
+              ),
 
               // GREY HEADER CONTAINER
               Container(
                 width: double.infinity,
 
-                height: headerheight,
+                height: 200,
                 decoration: BoxDecoration(
-                  color: Color(0xFFE6E6FA),
-                  borderRadius: BorderRadius.circular(40),
+                  color: Colors.orange[200],
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Stack(
                   children: [
                     Positioned(
-                      top: 60,
+                      top: 20,
                       left: 20,
                       child: CircleAvatar(
                         radius: 40,
                         backgroundImage: AssetImage('assets/logo/avatar1.png'),
-                        backgroundColor: Colors.white,
+                        backgroundColor: Colors.black26,
                       ),
                     ),
                     
@@ -131,7 +154,7 @@ class _homescreenState extends State<homescreen> {
                         width: 220,
                         decoration:BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color(0xFFE6E6FA)
+                          color: Colors.blueGrey
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -162,38 +185,45 @@ class _homescreenState extends State<homescreen> {
 
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: 300,
-                                height: 285,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFE6E6FA),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 8.0,left: 120),
-                                          child: ElevatedButton.icon(onPressed: (){
-                                            Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) => todaytaskscreen()));
-                                          }, icon: Icon(Icons.arrow_forward),style:ElevatedButton.styleFrom(
-                                            backgroundColor:Color(0xFFE6E6FA),
-                                            foregroundColor: Colors.black,
-                                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                                          ),label: Text('More'),),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding:  EdgeInsets.zero,
+              width: 300,
+              height: 285,
+              decoration: BoxDecoration(
+                color: Colors.white70,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  alltasks.isNotEmpty
+                      ? SizedBox(
+                    height: 260, // Give space for list inside container
+                    child: ListView.builder(
+                      itemCount: alltasks.length,
+                      itemBuilder: (_, index) {
+                        return ListTile(
+                          leading: Text('${alltasks[index][DbHelper.getInstance.COLUMN_SNO]}'),
+                          title: Text(alltasks[index][DbHelper.getInstance.COLUMN_TITLE]),
+                        );
+                      },
+                    ),
+                  )
+                      : const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('No task added'),
+                  ),
 
-                              ),
-                            )
-                          ],
+                ],
+
+              ),
+
+            ),
+          )
+
+          ],
                         ),
                       ),
                     ),
@@ -374,6 +404,8 @@ class _homescreenState extends State<homescreen> {
                          decoration: BoxDecoration(
                              borderRadius: BorderRadius.circular(20),
                              color: Color(0xFFADD8E6)
+
+
 
                          ),
                            child: Stack(

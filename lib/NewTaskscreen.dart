@@ -274,7 +274,13 @@ class _addnewtaskscreenState extends State<addnewtaskscreen> {
                                     tDate: _dateController.text,
                                     tdesc: _descController.text,
                                     priority: _priorityController.text);
+
                                 Navigator.pop(context);
+                                _titleController.clear();
+                                _descController.clear();
+                                _dateController.clear();
+                                _priorityController.clear();
+
                                 // Navigator.pop(context);
                               },
                               child: Padding(

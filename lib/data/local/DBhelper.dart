@@ -100,4 +100,23 @@ class DbHelper {
     var db = await getDB();
     return await db.query(TABLE_TODAY_TASK);
   }
+  Future<bool> update({required String tTitle ,
+    required String prirority ,
+    required  String tdesc ,
+    required int sno})async{
+    var db = await getDB();
+    int rowEffected  = await db.update(TABLE_TODAY_TASK, {
+      COLUMN_TITLE: tTitle,
+      COLUMN_DESCRIPTION: tdesc,
+      COLUMN_PRIORITY : prirority,
+      // COLUMN_DATE : tDate
+    }, where : "$COLUMN_SNO = $sno");
+    return rowEffected>0;
+  }
+  Future<bool> delete({required int sno})async{
+    var db = await getDB();
+    int rowEffected = await db.delete(TABLE_TODAY_TASK,
+      where: "$COLUMN_SNO = ?",whereArgs: ['$sno']    );
+    return rowEffected>0;
+  }
 }

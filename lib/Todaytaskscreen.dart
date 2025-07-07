@@ -69,8 +69,44 @@ class _todaytaskscreenState extends State<todaytaskscreen> {
                 itemCount: alltasks.length,
                 itemBuilder: (_, index) {
                   return ListTile(
+                    leading: Text('${alltasks[index][DbHelper.getInstance.COLUMN_SNO]}') ,
                     title: Text(alltasks[index][DbHelper.getInstance.COLUMN_TITLE]),
-                    subtitle: Text(alltasks[index][DbHelper.getInstance.COLUMN_DESCRIPTION] ?? ''),
+                    subtitle: Text(alltasks[index][DbHelper.getInstance.COLUMN_DESCRIPTION] ),
+                    trailing: SizedBox(
+                      width: 70,
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              // showModalBottomSheet(context: context, builder: (context){
+                              //   // var title = alltasks[index][DbHelper.getInstance.COLUMN_TITLE];
+                              //   // var desc = alltasks[index][DbHelper.getInstance.COLUMN_DESCRIPTION];
+                              //   // var sno =  alltasks[index][DbHelper.getInstance.COLUMN_SNO];
+                              //   // var prirority = alltasks[index][DbHelper.getInstance.COLUMN_PRIORITY];
+                              //   //
+                              //   // return getBottomsheet(title : title,desc : desc, sno: sno, prirority : prirority);
+                              //
+                              // });
+
+                            },
+                            child: Icon(Icons.edit),
+
+                          ),
+                          InkWell(
+                            onTap: (){
+                              
+                            },
+                            child: Icon(Icons.delete,color: Colors.red,),
+                          ),
+                         InkWell(
+                           onTap: (){
+
+                           },
+                           child: Text(">>",style: TextStyle(color: Colors.black),),
+                         )
+                        ],
+                      ),
+                    ),
                   );
                 },
               )
@@ -81,4 +117,44 @@ class _todaytaskscreenState extends State<todaytaskscreen> {
       ),
     );
   }
+  // Widget getBottomsheet({ required String title , required String desc,  required int sno, required String prirority}){
+  //   return Container(
+  //     height: 800,
+  //     width: 500,
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(10),
+  //
+  //     ),
+  //     child: Row(
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         ElevatedButton(onPressed: ()async{
+  //           await dbRef!.update(
+  //             tTitle: title,
+  //             tdesc: desc,
+  //             sno:  sno,
+  //             prirority: prirority,
+  //
+  //           );
+  //
+  //         }, style: ElevatedButton.styleFrom(
+  //             backgroundColor: Colors.blue,
+  //             foregroundColor: Colors.white,
+  //             elevation: 5,
+  //             shape: RoundedRectangleBorder(
+  //                 borderRadius: BorderRadius.circular(10)
+  //             )
+  //         ),
+  //             child: Text("Update",style: TextStyle(
+  //                 fontSize: 30
+  //             ),)
+  //
+  //
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  //
+  // }
 }
